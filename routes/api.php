@@ -12,8 +12,5 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::apiResources([
-    'users' => 'UserController',
-    'posts' => 'PostController',
-    'ratings' => 'RatingController',
-]);
+
+

@@ -17,4 +17,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::group(['middleware' => 'auth', 'prefix' => 'api'], function() {
+    Route::apiResources([
+        'users' => 'UserController',
+        'posts' => 'PostController',
+        'ratings' => 'RatingController',
+    ]);
+});
+
 Route::get('/{any}', 'AppController@index')->where('any', '.*');
