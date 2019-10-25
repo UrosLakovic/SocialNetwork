@@ -1870,6 +1870,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -2431,11 +2436,36 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "header",
-      { staticClass: "md:w-full .bg-gray-500 text-white py-6 px-4" },
-      [_c("h1", { staticClass: "text-2xl" }, [_vm._v(" Free Thought ")])]
-    )
+    return _c("header", { staticClass: "bg-gray-600 text-white py-5 px-4" }, [
+      _c("div", { staticClass: ".container flex" }, [
+        _c("h1", { staticClass: "text-2xl px-10 mr-48" }, [
+          _vm._v(" Free Thought ")
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "border-2 border-transparent bg-gray-700 hover:border-gray-900 rounded px-3 py-2 mx-5"
+          },
+          [_vm._v("My Posts")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "border-2 border-transparent bg-gray-700 hover:border-gray-900 rounded px-3 py-2 mx-5"
+          },
+          [_vm._v("Write new")]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "flex-1 rounded border-solid-gray-100 px-10 mx-5",
+          attrs: { type: "text", placeholder: "Search..." }
+        })
+      ])
+    ])
   }
 ]
 render._withStripped = true
