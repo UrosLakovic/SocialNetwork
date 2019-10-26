@@ -11,6 +11,10 @@
  */
 @tailwind base;
 
+::-webkit-scrollbar { 
+    display: none; 
+} 
+
 /**
  * This injects any component classes registered by plugins.
  *

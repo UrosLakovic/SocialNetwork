@@ -1,11 +1,9 @@
 <template>
-    <header class="bg-gray-600 text-white py-5 px-4">
-        <div class=".container flex">
-            <h1 class="text-2xl px-10 mr-48"> Free Thought </h1>
-            <button class="border-2 border-transparent bg-gray-700 hover:border-gray-900 rounded px-3 py-2 mx-5">My Posts</button>
-            <button class="border-2 border-transparent bg-gray-700 hover:border-gray-900 rounded px-3 py-2 mx-5">Write new</button>
-            <input type="text" placeholder="Search..." class="flex-1 rounded border-solid-gray-100 px-10 mx-5"/>
-        </div>
+    <header class="sticky top-0 flex justify-between bg-gray-600 text-white py-5 px-4 h-auto w-screen mb-8 border-b-2 border-gray-700">
+            <h1 class="text-2xl px-10 mr-48 font-semibold shadow-md cursor-pointer hover:shadow-lg"> Free Thought </h1>
+            <button class="hover:shadow-lg rounded px-3 py-2 mx-5 shadow-md">My Posts</button>
+            <button class="hover:shadow-lg rounded px-3 py-2 mx-5 shadow-md">Write new</button>
+            <input type="text" placeholder="Search..." class="w-2/5 shadow-md rounded-lg border-solid-gray-100 px-10 mx-5"/>
     </header>
 </template>
 <script>
