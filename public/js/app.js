@@ -1901,6 +1901,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1908,6 +1914,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     Post: _Post__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['loadInitialPostsAction'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
+    posts: function posts(state) {
+      return state.posts;
+    }
+  })),
   created: function created() {
     this.loadInitialPostsAction();
   }
@@ -1931,7 +1942,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    post: Object
+  }
+});
 
 /***/ }),
 
@@ -2533,10 +2548,17 @@ var render = function() {
     "div",
     {
       staticClass:
-        "container mx-auto px-10 py-4 w-3/4 bg-gray-200 h-screen rounded border-double border-8 border-gray-400"
+        "container mx-auto px-10 py-4 w-3/4 bg-gray-200 h-full rounded border-double border-8 border-gray-400"
     },
-    [_c("post"), _vm._v("\n    " + _vm._s(_vm.$store.state.posts) + "\n")],
-    1
+    [
+      _c(
+        "ul",
+        _vm._l(_vm.posts, function(post) {
+          return _c("post", { key: post.id, attrs: { post: post } })
+        }),
+        1
+      )
+    ]
   )
 }
 var staticRenderFns = []
@@ -2561,23 +2583,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass:
+        "border border-gray-400 px-4 py-4 mx-8 my-8 shadow-md h-64 rounded-lg hover:shadow-lg cursor-pointer"
+    },
+    [_c("div", [_vm._v("\n        " + _vm._s(_vm.post.title) + "\n    ")])]
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "border border-gray-400 px-4 py-4 mx-8 my-8 shadow-md h-64 rounded-lg hover:shadow-lg cursor-pointer"
-      },
-      [_c("div")]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
