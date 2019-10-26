@@ -1,0 +1,1 @@
+export const loadInitialPostsMutation = (state, posts) => state.posts = posts;
