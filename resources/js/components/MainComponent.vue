@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto px-10 py-4 w-3/4 bg-gray-200 h-full rounded border-double border-8 border-gray-400">
+    <div class="container mx-auto px-10 py-4 w-3/4 bg-gray-100 h-full rounded border-double border-8 border-gray-400">
         <ul>
             <post
             v-for="post  in posts"
@@ -13,7 +13,7 @@
 <script>
     import Post from './Post';
     import {mapActions} from 'vuex';
-    import {mapState} from 'vuex'
+    import {mapState} from 'vuex';
 
     export default {
         components: {
@@ -21,16 +21,22 @@
         },
         methods: {
             ...mapActions([
-                'loadInitialPostsAction'
+                'loadInitialPostsAction',
+                'loadInitialUsersAction',
+                'loadInitialRatingsAction'
             ])
         },
         computed: {
             ...mapState({
-                posts: state => state.posts
+                posts: state => state.posts,
+                users: state => state.users,
+                ratings: state => state.ratings
             })
         },
         created(){
                 this.loadInitialPostsAction();
+                this.loadInitialUsersAction();
+                this.loadInitialRatingsAction();
             }
     }
 </script>

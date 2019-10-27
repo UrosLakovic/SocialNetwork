@@ -1913,14 +1913,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     Post: _Post__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['loadInitialPostsAction'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['loadInitialPostsAction', 'loadInitialUsersAction', 'loadInitialRatingsAction'])),
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
     posts: function posts(state) {
       return state.posts;
+    },
+    users: function users(state) {
+      return state.users;
+    },
+    ratings: function ratings(state) {
+      return state.ratings;
     }
   })),
   created: function created() {
     this.loadInitialPostsAction();
+    this.loadInitialUsersAction();
+    this.loadInitialRatingsAction();
   }
 });
 
@@ -1935,6 +1943,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2490,33 +2514,33 @@ var staticRenderFns = [
       "header",
       {
         staticClass:
-          "sticky top-0 flex justify-between bg-gray-600 text-white py-5 px-4 h-auto w-screen mb-8 border-b-2 border-gray-700"
+          "z-50 sticky top-0 flex justify-between bg-gray-600 text-white py-5 px-4 h-auto w-screen mb-8 border-b-2 border-gray-700"
       },
       [
         _c(
           "h1",
           {
             staticClass:
-              "text-2xl px-10 mr-48 font-semibold shadow-md cursor-pointer hover:shadow-lg"
+              "text-2xl px-4 mr-64 ml-8 rounded font-semibold shadow-md cursor-pointer hover:shadow-lg"
           },
           [_vm._v(" Free Thought ")]
         ),
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "hover:shadow-lg rounded px-3 py-2 mx-5 shadow-md" },
-          [_vm._v("My Posts")]
+          { staticClass: "hover:shadow-lg rounded px-3 py-2 mx-5" },
+          [_vm._v("My Profile")]
         ),
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "hover:shadow-lg rounded px-3 py-2 mx-5 shadow-md" },
-          [_vm._v("Write new")]
+          { staticClass: "hover:shadow-lg rounded px-3 py-2 mx-5" },
+          [_vm._v("My Friends")]
         ),
         _vm._v(" "),
         _c("input", {
           staticClass:
-            "w-2/5 shadow-md rounded-lg border-solid-gray-100 px-10 mx-5",
+            "flex-1 shadow-md rounded-lg border-solid-gray-100 px-10 mx-5",
           attrs: { type: "text", placeholder: "Search..." }
         })
       ]
@@ -2548,7 +2572,7 @@ var render = function() {
     "div",
     {
       staticClass:
-        "container mx-auto px-10 py-4 w-3/4 bg-gray-200 h-full rounded border-double border-8 border-gray-400"
+        "container mx-auto px-10 py-4 w-3/4 bg-gray-100 h-full rounded border-double border-8 border-gray-400"
     },
     [
       _c(
@@ -2587,9 +2611,50 @@ var render = function() {
     "div",
     {
       staticClass:
-        "border border-gray-400 px-4 py-4 mx-8 my-8 shadow-md h-64 rounded-lg hover:shadow-lg cursor-pointer"
+        "relative border border-gray-400 px-4 py-4 mx-8 my-8 shadow-md h-64 rounded-lg hover:shadow-xl cursor-pointer"
     },
-    [_c("div", [_vm._v("\n        " + _vm._s(_vm.post.title) + "\n    ")])]
+    [
+      _c("div", [
+        _c("div", { staticClass: "flex justify-between" }, [
+          _c("div", { staticClass: "flex-1 font-semibold px-4 m-4 text-lg" }, [
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.post.writer.name) +
+                "\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "font-semibold py-2 m-4" }, [
+            _vm._v(
+              "\n                Rating: " +
+                _vm._s(_vm.post.rating) +
+                "\n            "
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "text-center" }, [
+          _vm._v("\n            " + _vm._s(_vm.post.title) + "\n        ")
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "border border-gray-400 rounded-lg px-4 py-4 my-4 mx-32"
+          },
+          [_vm._v("\n            " + _vm._s(_vm.post.body) + "\n        ")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "absolute bottom-0 right-0 mx-4 my-4" }, [
+          _vm._v(
+            "\n            Posted at: " +
+              _vm._s(_vm.post.created_at) +
+              "\n        "
+          )
+        ])
+      ])
+    ]
   )
 }
 var staticRenderFns = []
@@ -19060,17 +19125,37 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************!*\
   !*** ./resources/js/resource.js ***!
   \**********************************/
-/*! exports provided: postAPI */
+/*! exports provided: postAPI, userAPI, ratingAPI */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postAPI", function() { return postAPI; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userAPI", function() { return userAPI; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ratingAPI", function() { return ratingAPI; });
 var postAPI = {
   get: function get() {
     var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
     return axios.get('posts' + (id ? "/".concat(id) : '')).then(function (_ref) {
       var data = _ref.data;
+      return data;
+    });
+  }
+};
+var userAPI = {
+  get: function get() {
+    var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    return axios.get('users' + (id ? "/".concat(id) : '')).then(function (_ref2) {
+      var data = _ref2.data;
+      return data;
+    });
+  }
+};
+var ratingAPI = {
+  get: function get() {
+    var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    return axios.get('ratings' + (id ? "/".concat(id) : '')).then(function (_ref3) {
+      var data = _ref3.data;
       return data;
     });
   }
@@ -19109,18 +19194,34 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 /*!***************************************!*\
   !*** ./resources/js/store/actions.js ***!
   \***************************************/
-/*! exports provided: loadInitialPostsAction */
+/*! exports provided: loadInitialPostsAction, loadInitialUsersAction, loadInitialRatingsAction */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadInitialPostsAction", function() { return loadInitialPostsAction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadInitialUsersAction", function() { return loadInitialUsersAction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadInitialRatingsAction", function() { return loadInitialRatingsAction; });
 /* harmony import */ var _resource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../resource */ "./resources/js/resource.js");
+
+
 
 var loadInitialPostsAction = function loadInitialPostsAction(_ref, payload) {
   var commit = _ref.commit;
   return _resource__WEBPACK_IMPORTED_MODULE_0__["postAPI"].get().then(function (posts) {
     return commit('loadInitialPostsMutation', posts);
+  });
+};
+var loadInitialUsersAction = function loadInitialUsersAction(_ref2, payload) {
+  var commit = _ref2.commit;
+  return _resource__WEBPACK_IMPORTED_MODULE_0__["userAPI"].get().then(function (users) {
+    return commit('loadInitialUsersMutation', users);
+  });
+};
+var loadInitialRatingsAction = function loadInitialRatingsAction(_ref3, payload) {
+  var commit = _ref3.commit;
+  return _resource__WEBPACK_IMPORTED_MODULE_0__["ratingAPI"].get().then(function (ratings) {
+    return commit('loadInitialRatingsMutation', ratings);
   });
 };
 
@@ -19173,14 +19274,22 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************!*\
   !*** ./resources/js/store/mutations.js ***!
   \*****************************************/
-/*! exports provided: loadInitialPostsMutation */
+/*! exports provided: loadInitialPostsMutation, loadInitialUsersMutation, loadInitialRatingsMutation */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadInitialPostsMutation", function() { return loadInitialPostsMutation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadInitialUsersMutation", function() { return loadInitialUsersMutation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadInitialRatingsMutation", function() { return loadInitialRatingsMutation; });
 var loadInitialPostsMutation = function loadInitialPostsMutation(state, posts) {
   return state.posts = posts;
+};
+var loadInitialUsersMutation = function loadInitialUsersMutation(state, users) {
+  return state.users = users;
+};
+var loadInitialRatingsMutation = function loadInitialRatingsMutation(state, ratings) {
+  return state.ratings = ratings;
 };
 
 /***/ }),
@@ -19195,7 +19304,9 @@ var loadInitialPostsMutation = function loadInitialPostsMutation(state, posts) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  posts: []
+  posts: [],
+  users: [],
+  ratings: []
 });
 
 /***/ }),
