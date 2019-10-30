@@ -14,7 +14,7 @@ export const loadMorePostsAction =
                 commit('pageIncrementMutation');
                 commit('loadMorePostsMutation', posts);
                 resolve(posts);
-            } else reject();
+            } else reject('No more posts');
         })
     })
 }

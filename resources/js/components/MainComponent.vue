@@ -7,7 +7,9 @@
             :key="post.id"
             />
         </ul>
-        <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+        <infinite-loading @infinite="infiniteHandler">
+            <div slot="no-more" class="font-semibold text-gray-600 text-center">Sorry, no more posts..</div>
+        </infinite-loading>
     </div>
 </template>
 
@@ -30,16 +32,18 @@
             infiniteHandler(loadingState) {
                 this.loadMorePostsAction().then(response => {
                     loadingState.loaded();
-                    }, error => {
-                    loadingState.completed();
                     })
-            },
+                    .catch(reason => {
+                        loadingState.complete();
+                    })
+            }
         },
         computed: {
             ...mapState({
                 posts: state => state.posts,
                 users: state => state.users,
-                page: state => state.page
+                page: state => state.page,
+                full: state => state.full
             })
         },
         /*created(){

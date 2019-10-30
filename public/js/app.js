@@ -1909,6 +1909,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -1922,8 +1924,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     infiniteHandler: function infiniteHandler(loadingState) {
       this.loadMorePostsAction().then(function (response) {
         loadingState.loaded();
-      }, function (error) {
-        loadingState.completed();
+      })["catch"](function (reason) {
+        loadingState.complete();
       });
     }
   }),
@@ -1936,6 +1938,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     page: function page(state) {
       return state.page;
+    },
+    full: function full(state) {
+      return state.full;
     }
   }))
   /*created(){
@@ -2617,7 +2622,17 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("infinite-loading", { on: { infinite: _vm.infiniteHandler } })
+      _c("infinite-loading", { on: { infinite: _vm.infiniteHandler } }, [
+        _c(
+          "div",
+          {
+            staticClass: "font-semibold text-gray-600 text-center",
+            attrs: { slot: "no-more" },
+            slot: "no-more"
+          },
+          [_vm._v("Sorry, no more posts..")]
+        )
+      ])
     ],
     1
   )
@@ -19258,7 +19273,7 @@ var loadMorePostsAction = function loadMorePostsAction(_ref3, payload) {
         commit('pageIncrementMutation');
         commit('loadMorePostsMutation', posts);
         resolve(posts);
-      } else reject();
+      } else reject('No more posts');
     });
   });
 };
