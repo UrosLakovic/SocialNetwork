@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto px-10 py-4 w-3/4 bg-gray-100 h-full rounded border-double border-8 border-gray-400">
+    <div class="container flex-1 mx-auto px-10 py-4 w-3/4 bg-gray-100 rounded border-double border-8 border-gray-400 overflow-auto">
         <ul>
             <post
             v-for="post  in posts"
@@ -7,6 +7,7 @@
             :key="post.id"
             />
         </ul>
+        <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </div>
 </template>
 
@@ -14,29 +15,36 @@
     import Post from './Post';
     import {mapActions} from 'vuex';
     import {mapState} from 'vuex';
+    import InfiniteLoading from 'vue-infinite-loading';
 
     export default {
         components: {
-            Post: Post
+            Post: Post,
+            InfiniteLoading
         },
         methods: {
             ...mapActions([
-                'loadInitialPostsAction',
                 'loadInitialUsersAction',
-                'loadInitialRatingsAction'
-            ])
+                'loadMorePostsAction'
+            ]),
+            infiniteHandler(loadingState) {
+                this.loadMorePostsAction().then(response => {
+                    loadingState.loaded();
+                    }, error => {
+                    loadingState.completed();
+                    })
+            },
         },
         computed: {
             ...mapState({
                 posts: state => state.posts,
                 users: state => state.users,
-                ratings: state => state.ratings
+                page: state => state.page
             })
         },
-        created(){
+        /*created(){
                 this.loadInitialPostsAction();
                 this.loadInitialUsersAction();
-                this.loadInitialRatingsAction();
-            }
+            }*/
     }
 </script>

@@ -15,7 +15,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        return PostResource::collection(\Auth::user()->posts);
+        $posts = Post::orderByRaw('(SELECT AVG(rating) from ratings where post_id = posts.id )
+            /(datediff(now(),created_at)+1) desc')
+            ->simplePaginate(20);
+        return PostResource::collection(collect($posts->items()));
     }
 
     /**

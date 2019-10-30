@@ -14,4 +14,9 @@ class Post extends Model
     {
         return $this->hasMany(Rating::class);
     }
+
+    public function getAverageRatingAttribute()
+    {
+        return round($this->ratings->avg('rating'), 2);
+    }
 }

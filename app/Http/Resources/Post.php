@@ -25,10 +25,8 @@ class Post extends JsonResource
             'user_id' => $this->user_id,
             'created_at' => date_format($this->created_at, 'd/m/Y H:i:s'),
             'updated_at' => date_format($this->updated_at, 'd/m/Y H:i:s'),
-            'writer' => new UserResource(User::find($this->user_id)),
-            'rating' => round(RatingResource::collection(Rating::all())
-            ->whereIn('post_id', [$this->id])
-            ->avg('rating'), 2)
+            'writer' => new UserResource($this->user),
+            'rating' => $this->average_rating
         ];
     }
 }

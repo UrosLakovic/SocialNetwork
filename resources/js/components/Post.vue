@@ -12,7 +12,7 @@
             <div class="text-center">
                 {{ post.title }}
             </div>
-            <div class="border border-gray-400 rounded-lg px-4 py-4 my-4 mx-32">
+            <div class="border border-gray-400 rounded-lg mx-16 px-4 py-4 my-4 h-24 overflow-hidden">
                 {{ post.body }}
             </div>
             <div class="absolute bottom-0 right-0 mx-4 my-4">

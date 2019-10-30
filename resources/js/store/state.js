@@ -1,5 +1,5 @@
 export default {
     posts : [],
     users : [],
-    ratings : []
+    page : 1
 }
