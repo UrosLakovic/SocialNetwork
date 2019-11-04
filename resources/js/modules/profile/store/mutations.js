@@ -1,0 +1,1 @@
+export const loadUserMutation = (state, user) => state.user = user;

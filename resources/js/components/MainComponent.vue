@@ -8,7 +8,9 @@
             />
         </ul>
         <infinite-loading @infinite="infiniteHandler">
-            <div slot="no-more" class="font-semibold text-gray-600 text-center">Sorry, no more posts..</div>
+            <div slot="no-more" class="font-semibold text-gray-600 text-center">
+                Sorry, no more posts..
+            </div>
         </infinite-loading>
     </div>
 </template>
@@ -26,7 +28,6 @@
         },
         methods: {
             ...mapActions([
-                'loadInitialUsersAction',
                 'loadMorePostsAction'
             ]),
             infiniteHandler(loadingState) {
@@ -42,8 +43,7 @@
             ...mapState({
                 posts: state => state.posts,
                 users: state => state.users,
-                page: state => state.page,
-                full: state => state.full
+                page: state => state.page
             })
         },
         /*created(){

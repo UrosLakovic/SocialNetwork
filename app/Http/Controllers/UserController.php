@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\User as UserResource;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\User as User;
 
 class UserController extends Controller
 {
@@ -37,7 +37,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return new UserResource(User::find($id));
     }
 
     /**

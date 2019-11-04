@@ -1,14 +1,20 @@
 export const postAPI = {
-    get(id=null, page) {
-        return axios.get('posts' + (id ? `/${id}`:''), { 
+    get(page) {
+        return axios.get('posts', { 
                 params: {
                     page
                 }
         }).then(({data})=>data)
+    },
+    getSinglePost(id) {
+        return axios.get(`posts/${id}`).then(({data})=>data)
     }
 }
 export const userAPI = {
-    get(id=null) {
-        return axios.get('users' + (id ? `/${id}`:'')).then(({data})=>data)
+    get() {
+        return axios.get('users').then(({data})=>data)
+    },
+    getSingleUser(id) {
+        return axios.get(`users/${id}`).then(({data})=>data)
     }
 }
