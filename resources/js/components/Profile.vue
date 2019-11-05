@@ -29,7 +29,7 @@ export default {
             })
         },
         created(){
-            this.loadUserAction();
+            this.loadUserAction(+this.$route.params.id); //id was string, + is changing it in number
         }
 }
 </script>

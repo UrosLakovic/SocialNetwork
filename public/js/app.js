@@ -2040,7 +2040,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   })),
   created: function created() {
-    this.loadUserAction();
+    this.loadUserAction(+this.$route.params.id); //id was string, + is changing it in number
   }
 });
 
@@ -2652,20 +2652,24 @@ var render = function() {
         [_vm._v(" Free Thought ")]
       ),
       _vm._v(" "),
-      _c("button", { staticClass: "hover:shadow-lg rounded px-3 py-2 mx-5" }, [
-        _vm._v("My Profile")
-      ]),
-      _vm._v(" "),
-      _c("button", { staticClass: "hover:shadow-lg rounded px-3 py-2 mx-5" }, [
-        _vm._v("My Friends")
-      ]),
+      _c(
+        "router-link",
+        {
+          staticClass: "hover:shadow-lg rounded px-3 py-2 mx-5",
+          attrs: {
+            to: { name: "profile", params: { id: _vm.window.currentUser.id } }
+          }
+        },
+        [_vm._v("My Profile")]
+      ),
       _vm._v(" "),
       _c("input", {
         staticClass:
           "flex-1 shadow-md rounded-lg border-solid-gray-100 px-10 mx-5",
         attrs: { type: "text", placeholder: "Search..." }
       })
-    ]
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -2750,23 +2754,37 @@ var render = function() {
     },
     [
       _c("div", [
-        _c("div", { staticClass: "flex justify-between" }, [
-          _c("div", { staticClass: "flex-1 font-semibold px-4 m-4 text-lg" }, [
-            _vm._v(
-              "\n                " +
-                _vm._s(_vm.post.writer.name) +
-                "\n            "
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "font-semibold py-2 m-4" }, [
-            _vm._v(
-              "\n                Rating: " +
-                _vm._s(_vm.post.rating) +
-                "\n            "
-            )
-          ])
-        ]),
+        _c(
+          "div",
+          { staticClass: "flex justify-between" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "flex-1 font-semibold px-4 m-4 text-lg",
+                attrs: {
+                  to: { name: "profile", params: { id: _vm.post.user_id } }
+                }
+              },
+              [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.post.writer.name) +
+                    "\n            "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "font-semibold py-2 m-4" }, [
+              _vm._v(
+                "\n                Rating: " +
+                  _vm._s(_vm.post.rating) +
+                  "\n            "
+              )
+            ])
+          ],
+          1
+        ),
         _vm._v(" "),
         _c("div", { staticClass: "text-center" }, [
           _vm._v("\n            " + _vm._s(_vm.post.title) + "\n        ")
@@ -19431,9 +19449,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadUserAction", function() { return loadUserAction; });
 /* harmony import */ var _resource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../resource */ "./resources/js/resource.js");
 
-var loadUserAction = function loadUserAction(_ref) {
+var loadUserAction = function loadUserAction(_ref, id) {
   var commit = _ref.commit;
-  return _resource__WEBPACK_IMPORTED_MODULE_0__["userAPI"].getSingleUser(1).then(function (user) {
+  return _resource__WEBPACK_IMPORTED_MODULE_0__["userAPI"].getSingleUser(id).then(function (user) {
     return commit('loadUserMutation', user);
   });
 };
@@ -19579,9 +19597,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 /* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
   routes: [{
+    name: 'home',
     path: '/home',
     component: _components_MainComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
   }, {
+    name: 'profile',
     path: '/users/:id',
     component: _components_Profile__WEBPACK_IMPORTED_MODULE_3__["default"]
   }]
